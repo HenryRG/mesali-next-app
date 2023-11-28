@@ -1,4 +1,4 @@
-import SearchbarHeader from "./SearchbarHeader";
+import SearchBarArea from "./SearchBarArea";
 
 
 const Header = () => {
@@ -6,6 +6,8 @@ const Header = () => {
         <div className="h-64 bg-gradient-to-r from-[#0f1f47] to-[#5f6984]">
             <div className="text-center pt-10">
                 <h1 className="text-white text-4xlg font-bold mb-2">Find Your Table For Any Occasion</h1>
+                {/* search bar and button from SearchBarArea */}
+                <SearchBarArea />
             </div>
         </div>
     )
