@@ -7,14 +7,13 @@ import Description from "./Description";
 
 const RestaurantPage = () => {
   return (
-    <main className="bg-white max-w-screen-2xl m-auto">
+      //this is the restaurant page 
+    <main className="bg-white max-w-screen-2xl m-auto ">
       {/* Navbar is global */}
         <Navbar />
         <Header />
         <Description />
         
-
-        {/* <Link href="./">BACK TO HOMEPAGE</Link> */}
     </main>
   )
 }
