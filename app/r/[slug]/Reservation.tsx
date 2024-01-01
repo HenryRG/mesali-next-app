@@ -5,7 +5,7 @@ const Reservation = () => {
         // Card Position
     <div className="w-[27%] relative">
         {/* Reservation Card */}
-        <div className="fixed bg-white rounded p-3 drop-shadow-lg">
+        <div className="bg-white rounded p-3 drop-shadow-lg mb-5">
             <div className="text-center text-reg border-b p-2 font-bold">
                 <h4 className="mr-7 text-lg">Make a Reservation</h4>
             </div>
