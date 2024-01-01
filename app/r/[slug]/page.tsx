@@ -8,9 +8,8 @@ import Description from "./Description";
 const RestaurantPage = () => {
   return (
       //this is the restaurant page 
-    <main className="bg-white max-w-screen-2xl m-auto ">
+    <main>
       {/* Navbar is global */}
-        <Navbar />
         <Header />
         <Description />
         

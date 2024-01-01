@@ -6,9 +6,8 @@ import Link from "next/link"
 
 const menu = () => {
   return (
-    <main className="bg-white max-w-screen-2xl m-auto">
+    <main>
       {/* Navbar is global */}
-        <Navbar />
         <Header />
         <MenuDescription />
         

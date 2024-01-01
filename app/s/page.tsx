@@ -7,8 +7,7 @@ import SearchSideBar from "./SearchSideBar"
 
 const SearchPage = () => {
   return (
-    <main className="bg-white max-w-screen-2xl m-auto ">
-        <Navbar />
+    <main>
         <Header />
         {/* Hero Layout */}
         <div className="flex p-10 m-auto w-2/3 justify-between items-start">
