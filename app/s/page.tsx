@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar"
 import Header from "./Header"
 import RestaurantCard from "./RestaurantCard"
 import SearchSideBar from "./SearchSideBar"

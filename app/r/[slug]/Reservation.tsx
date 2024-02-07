@@ -11,20 +11,20 @@ const Reservation = () => {
             </div>
             {/* options */}
             <div className="my-3 flex flex-col">
-                <label htmlFor="">Party Size</label>
-                <select name="" id="" className="my-3 font-light border-b">
+                <label htmlFor="#person">Party Size</label>
+                <select name="" id="#person" className="my-3 font-light border-b">
                     <option value="">1 person</option>
                     <option value="">2 people </option>
                 </select>
             </div> 
             <div className="flex justify-between">
                 <div className="flex flex-col w-[48%]">
-                    <label htmlFor="">Date</label>
-                    <input type="text" className="py-3 px-2 font-light w-26 border-b" />
+                    <label htmlFor="#date">Date</label>
+                    <input type="text" id="#date" className="py-3 px-2 font-light w-26 border-b" />
                 </div>
                 <div className="flex flex-col w-[48%]">
-                    <label htmlFor="">Time</label>
-                    <select name="" id="" className="py-3 font-light border-b">
+                    <label htmlFor="#time">Time</label>
+                    <select name="" id="#time" className="py-3 font-light border-b">
                         <option value="">12:00 PM</option>
                         <option value="">08:30 PM</option>
                     </select>

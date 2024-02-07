@@ -36,3 +36,5 @@ const CardArea = () => {
 }
 
 export default CardArea
+
+//v@1Tom4r1Ju1c3

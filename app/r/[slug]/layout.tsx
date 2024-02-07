@@ -1,17 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
+import Navbar from '../../components/Navbar'
+import Header from './Header';
 
 
-const inter = Inter({ subsets: ['latin'] })
 const title = {
-  name:"Hi Ohio"
+  name:"Lorem Ipsum",
+  description: "This is a amazing restaurant"
 }
 
 
 export const metadata: Metadata = {
-  title: title.name,
-  description: 'Website description',
+  title:  title.name + ` | Restaurant`,
+  description: title.description,
     icons: 
       {
         icon: '/favicon-16x16.png',
@@ -19,20 +19,21 @@ export const metadata: Metadata = {
       },
 }; 
 
-export default function RootLayout({
+export default function RestaurantLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <>
       <body className="bg-gray-100 min-h-screen w-screen">
         <div className="max-w-screen-2xl m-auto bg-white">
           {/* Navbar is Global */}
-          
+          <Navbar />
+          <Header />
           {children}
         </div>
       </body>
-    </html>
+    </>
   )
 }
