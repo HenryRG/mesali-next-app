@@ -5,7 +5,7 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 const title = {
-  name:"Hi Ohio"
+  name:"Mesali"
 }
 
 
@@ -28,8 +28,6 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-gray-100 min-h-screen w-screen">
         <div className="max-w-screen-2xl m-auto bg-white">
-          {/* Navbar is Global */}
-          
           {children}
         </div>
       </body>

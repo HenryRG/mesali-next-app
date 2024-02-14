@@ -2,7 +2,7 @@ import  Link  from 'next/link'
 
 const Navbar = () => {
     return (
-        <nav className="bg-white p-2 flex justify-between">
+        <nav className="w-full bg-white p-2 flex justify-between">
             <Link href="/" className='font-bold text-gray-700 text-3xlg'>Mesali</Link>
             {/* Sign Buttons */}
             <div>
