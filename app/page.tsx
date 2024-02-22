@@ -1,28 +1,53 @@
 import Header from './components/Header'
 import CardArea from './components/CardArea'
 import Navbar from './components/Navbar'
-import { PrismaClient } from '@prisma/client'  //importing the ORM from Prisma
+import { Cuisine, Location, PRICE, PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient();  //running the prisma database
-
-const fetchRestaurants = async () => {  //fetching the data from database
-  const restaurants = await prisma.restaurant.findMany(); //finding many restaurants from db
-
-  return restaurants 
+export interface RestaurantCardType {
+    id: number,
+    name: string,
+    main_image: string,
+    location: Location,
+    cuisine: Cuisine,
+    price: PRICE
 }
 
-export default async function Home() {  //putting the data inside the components
-  const restaurants = await fetchRestaurants();
+const prisma = new PrismaClient();
 
-  console.log({restaurants})
+const fetchRestaurant = async (): Promise<RestaurantCardType[]> =>{
+  const restaurants = await prisma.restaurant.findMany({
+    select: {
+      id: true,
+      name: true,
+      main_image: true,
+      location: true,
+      cuisine: true,
+      price: true
+    }
+
+  })
+  return restaurants;   
+}
+
+export default async function Home() {  
+  const restaurants = await fetchRestaurant();
+  // console.log({restaurants})
+
   return (
-    <div> 
-      {/* Homepage Header */}
+    <div>
       <Navbar />
+       {/* Homepage Header */}
       <Header />
-      {/* Homepage Card Area */}
-      <CardArea />
+      {/* Homepage Card Area */} 
+      <div className="py-3 px-36 mt-10 flex flex-wrap justify-center">
 
+        { restaurants.map((restaurant)=> (  
+          <CardArea key={restaurant.id} restaurant = {restaurant}/>  
+        )) }
+        
+      </div>
+     
+      
     </div>
   )
 }
