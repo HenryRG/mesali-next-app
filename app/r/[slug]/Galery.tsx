@@ -1,17 +1,17 @@
 
 // Galery is on description
-const Galery = () => {
+const Galery = ({images}: {images: string[] }) => {
   return (
     <div>
         <h1 className="font-bold text-3xlg mt-10 mb-7 border-b pb-5">
-            5 Photos
+            {images.length} photo{images.length > 1 ? "s" : "" }
         </h1>
         <div className="flex flex-wrap">
-            <img className="w-56 h-44 mr-1 mb-1" src="https://source.unsplash.com/random/?city" alt="" />
-            <img className="w-56 h-44 mr-1 mb-1" src="https://source.unsplash.com/random/?person" alt="" />
-            <img className="w-56 h-44 mr-1 mb-1" src="https://source.unsplash.com/random/?car" alt="" />
-            <img className="w-56 h-44 mr-1 mb-1" src="https://source.unsplash.com/random/?food" alt="" />
-            <img className="w-56 h-44 mr-1 mb-1" src="https://source.unsplash.com/random" alt="" />
+          {
+          images.map(image => (
+            <img key={image} className="w-56 h-44 mr-1 mb-1" src={image} alt="" />
+          ))
+          }
         </div>
 
     </div>

@@ -1,10 +1,11 @@
 "use client"
-
 import {useRouter} from 'next/navigation'
 import {useState} from 'react'
 
 
+
 const SearchBarArea = () => {
+  // useRouter is 
   const router = useRouter()
   const [location, setLocation] = useState("")
   return (
@@ -18,9 +19,11 @@ const SearchBarArea = () => {
         />
         <button 
           className="rounded bg-red-600 text-white px-9 py-2 font-light"
+          // Right here I'm setting the query on URL
           onClick={()=>{
-            if(location === "elbow") return;
-            router.push('/s')
+            if(location === "") return;
+            router.push(`/s?city=${location}`)  // http://localhost:3000/s?city=cityname
+            setLocation("")
           }}
           >Let's Go
         </button>

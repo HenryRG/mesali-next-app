@@ -4,7 +4,7 @@ import Header from './Header';
 
 
 const title = {
-  name:"Lorem Ipsum",
+  name: "Lorem Ipsum",
   description: "This is a amazing restaurant"
 }
 
@@ -21,8 +21,10 @@ export const metadata: Metadata = {
 
 export default function RestaurantLayout({
   children,
+  params
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  params: {slug: string}
 }) {
   return (
     <>
@@ -30,7 +32,7 @@ export default function RestaurantLayout({
         <div className="max-w-screen-2xl m-auto bg-white">
           {/* Navbar is Global */}
           <Navbar />
-          <Header />
+          <Header name={params.slug}/>
           {children}
         </div>
       </body>
