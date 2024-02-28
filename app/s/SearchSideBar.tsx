@@ -1,19 +1,22 @@
+import { Cuisine, Location } from "@prisma/client";
 
-const SearchSideBar = () => {
+const SearchSideBar = ({locations, cuisines}:  {locations: Location[], cuisines: Cuisine[]} ) => {
+    // console.log({restaurant})
   return (
     <div className="w-1/5">
         <div className="border-b pb-4">
             <h1 className="mb-2 font-bold">Region</h1>
-            <p className="font-light text-reg">Luanda</p>
-            <p className="font-light text-reg">Benguela</p>
+            {locations.map((location) => (
+                <p className="text-reg capitalize" key={location.id}>{location.name}</p>
+            ))}
+            
         </div>
         <div className="border-b pb-4">
             <h1 className="mb-2 font-bold">Cuisine</h1>
-            <p className="font-light text-reg">Mexicain</p>
-            <p className="font-light text-reg">Italian</p>
-            <p className="font-light text-reg">Angolan</p>
-            <p className="font-light text-reg">French</p>
-            <p className="font-light text-reg">Japanese</p>
+            {cuisines.map(cuisine =>(
+                <p className="text-reg capitalize" key={cuisine.id}>{cuisine.name}</p>
+            ))}
+            
         </div>
         <div className="mt-3 b-4">
             <h1 className="font-bold pb-2">Price</h1>
