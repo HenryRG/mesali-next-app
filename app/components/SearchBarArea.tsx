@@ -5,7 +5,7 @@ import {useState} from 'react'
 
 
 const SearchBarArea = () => {
-  // useRouter is 
+  
   const router = useRouter()
   const [location, setLocation] = useState("")
   return (

@@ -1,5 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app). 
+This is a [Next.js] project.
 
-You can see more projects on my github.
+This Project is created by me while I was doing a NextJS course. I made some changes to 
+the final project, changes that are better to the user experince and to the "company".
+
+It's a website created to connect users to restaurants. The main goal is 
+make a reserve in the restaurant without call to them.
+
 
 The design of this project was build with [Tailwind]
+The database is build on [Postgres]
+
+The database management system that is used is [Supabase]
