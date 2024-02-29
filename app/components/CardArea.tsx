@@ -1,14 +1,20 @@
 import Link from "next/link"
 import { RestaurantCardType } from "../page"
 import Price from "./Price"
+import Stars from "./Stars"
 
 
 interface Props {
     restaurant: RestaurantCardType
 }
 
-
 const CardArea = ({restaurant}: Props) => {
+    // console.log({review})
+    const renderReview = () =>{
+        return (restaurant.review.length) === 1 ? `${restaurant.review.length} review` 
+                : `${restaurant.review.length} reviews`
+    }
+
   return (
     <div className="flex-wrap py-2 px-2 mt-10 ">
 
@@ -26,8 +32,8 @@ const CardArea = ({restaurant}: Props) => {
                     {/* Star And review rating */}
                 <div className="flex items-start">
                     {/* Star Rating */}
-                    <div className="flex mb-2">*****</div>
-                    <p className="ml-2">54 reviews</p>
+                    <Stars review={restaurant.review} />
+                    <p className="ml-2" key={restaurant.id}>{renderReview()}</p>
                 </div>
                 <div className="flex font-light capitalize">
                     <p className="text-reg  mr-3">{restaurant.cuisine.name}</p> •

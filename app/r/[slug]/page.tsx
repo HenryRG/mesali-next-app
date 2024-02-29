@@ -1,6 +1,6 @@
 // import Header from "./Header";
 import Description from "./Description";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Review, User } from "@prisma/client";
 
 // You need a interface, because without off this the restaurant return the data or NULL
 
@@ -11,7 +11,8 @@ export interface RestaurantSlugType {
   name: string,
   images: string[],
   description: string,
-  slug: string
+  slug: string,
+  review: Review[],
 }
 
 const fetchRestaurantSlug = async (slug: string) =>{
@@ -24,7 +25,8 @@ const fetchRestaurantSlug = async (slug: string) =>{
       name: true,
       images: true,
       description: true,
-      slug: true
+      slug: true,
+      review: true,
     }
   }); //Make sure the data always return restaurant if not return error
   if (!restaurant){

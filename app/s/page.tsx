@@ -35,9 +35,6 @@ const fetchRestaurants = (searchParams: SearchParams) => {
     }
     where.price = price
   }
-
-
-
   // select object to reduce space
   const select = {
     id: true,
@@ -46,13 +43,9 @@ const fetchRestaurants = (searchParams: SearchParams) => {
     cuisine: true,
     location: true,
     slug: true,
-    price: true
+    price: true,
+    review: true
   }
-  // If the restaurant does not have a city declared return all restaurants
-  // if(!city) return prisma.restaurant.findMany({
-  //   // select object
-  //   select
-  // });
 
   // If has return the restaurants tha the location name is equal to the city query
   return prisma.restaurant.findMany({
@@ -79,7 +72,7 @@ const SearchPage = async ({searchParams}: {
   const cuisine = await fetchCuisine();
   
   return (
-    <main>
+    <main> 
       <Header />
       {/* Hero Layout */}
       <div className="flex p-10 m-auto w-2/3 justify-between items-start">

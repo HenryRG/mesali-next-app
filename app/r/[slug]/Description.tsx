@@ -25,14 +25,14 @@ const Description = ({restaurant}: Props) => {
           </div>
           {/* Title */}
           {/* RATINGS */}
-          <Ratings /> 
+          <Ratings review={restaurant.review}/> 
           <div className="mt-4">
               <p className="text-lg font-light">{restaurant.description}</p>
           </div>
           {/* Galery */}
           <Galery images={restaurant.images}/>
           {/* Reviews */}
-          <Reviews />
+          <Reviews review={restaurant.review}/>
         </div>  
        {/* DESCRIPTION  PORTION */}
        <Reservation />

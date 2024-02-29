@@ -1,7 +1,7 @@
 generator client {
   provider = "prisma-client-js"
 }
-
+// npx prisma db push
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -22,6 +22,7 @@ model Restaurant {
   location_id Int
   cuisine_id  Int
   items       Item[]
+  review      Review[]
   cuisine     Cuisine  @relation(fields: [cuisine_id], references: [id])
   location    Location @relation(fields: [location_id], references: [id])
 }
@@ -57,4 +58,31 @@ enum PRICE {
   CHEAP
   REGULAR
   EXPENSIVE
+}
+
+model User {
+  id          Int @unique @default(autoincrement())
+  first_name  String
+  last_name   String
+  city        String
+  email       String
+  phone       String
+  password    String
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  review      Review[]
+}
+
+model Review {
+  id            Int @unique @default(autoincrement())
+  first_name    String
+  last_name     String
+  text          String
+  rating        Float
+  restaurant_id Int
+  restaurant    Restaurant @relation(fields: [restaurant_id], references: [id])
+  user_id       Int
+  user          User @relation(fields: [user_id], references: [id])
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
 }

@@ -1,14 +1,21 @@
+import Stars from "@/app/components/Stars"
+import { calculateReviewRatingAverege } from "@/app/utils/calculateReviewRatingAverage"
+import { Review } from "@prisma/client"
 
 
-const Ratings = () => {
+const Ratings = ({review}: {review: Review[]}) => {
+  const renderRating = () =>{
+    return calculateReviewRatingAverege(review).toFixed(1)
+  }
   return (
     <div className="flex items-end">
       <div className="flex mt-2 items-center ">
-        <p>*****</p>
-        <p className="text-reg ml-3">4.8</p>
+        <Stars review={review} />
+        <p className="text-reg ml-3">({renderRating()})</p>
       </div>
       <div>
-        <p className="text-reg ml-4">323 Reviews</p>
+        <p className="text-reg ml-4">{review.length} {review.length > 1 ? "Reviews": 
+                                                     review.length == 1 ? "Review"  : "" }</p>
       </div>
     </div>
   )
