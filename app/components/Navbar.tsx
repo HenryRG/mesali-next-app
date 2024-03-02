@@ -1,14 +1,15 @@
 import  Link  from 'next/link'
+import AuthModal from './AuthModal'
 
 const Navbar = () => {
     return (
-        <nav className="w-full bg-white p-2 flex justify-between">
+        <nav className="w-screen bg-white p-2 px-6 flex justify-between overflow-hidden">
             <Link href="/" className='font-bold text-gray-700 text-3xlg'>Mesali</Link>
             {/* Sign Buttons */}
             <div>
                 <div className='flex'>
-                    <button className='bg-green-400 text-white border p-2 px-4 rounded mr-3'>Sign in</button>
-                    <button className=' border p-2 px-4 rounded'>Sign up</button>
+                    <AuthModal isSignin={true}/>
+                    <AuthModal isSignin={false}/>
                 </div>
             </div>
         </nav>

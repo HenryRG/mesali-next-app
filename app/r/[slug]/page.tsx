@@ -1,5 +1,5 @@
 // import Header from "./Header";
-import Description from "./Description";
+import Description from "./components/Description";
 import { PrismaClient, Review, User } from "@prisma/client";
 
 // You need a interface, because without off this the restaurant return the data or NULL

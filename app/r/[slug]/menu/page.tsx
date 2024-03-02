@@ -1,8 +1,8 @@
 import { PrismaClient } from "@prisma/client"
 // import Header from "../Header"
 import MenuDescription from "./MenuDescription"
-import DescriptionNavbar from "../DescriptionNavbar"
-import Reservation from "../Reservation";
+import DescriptionNavbar from "../components/DescriptionNavbar"
+import Reservation from "../components/Reservation";
 
 const prisma = new PrismaClient();
 

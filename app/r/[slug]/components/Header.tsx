@@ -1,6 +1,6 @@
 
 
-const Header = ({name}: {name: string}) => {
+const Header = ({name, restaurant}: {name: string, restaurant: []}) => {
   const renderName = () =>{
     const nameWithDash = name.split("-");
     nameWithDash[nameWithDash.length - 1] = `(${nameWithDash[nameWithDash.length - 1]})`;

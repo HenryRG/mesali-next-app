@@ -1,3 +1,4 @@
+"use client"
 import fullStar from '../../public/icons/full-star.png';
 import emptyStar from '../../public/icons/empty-star.png';
 import halfStar from '../../public/icons/half-star.png';
@@ -23,11 +24,13 @@ const Stars = ({review, reviewRating}: {review: Review[], reviewRating?: number}
       else star.push(emptyStar)
     }       // iterate from the stars that are pushed into star[]  
     return star.map((star) => (
-      <Image src={star} alt="" className='w-4 h-4 mr-1' />
+      <div className='flex flex-row my-1'>
+        <Image src={star} alt="" className='w-4 h-4 mr-1' />
+      </div>
     ))
   }
 
-  return <div className='flex flex-row my-1'>{renderStars()}</div>
+  return renderStars()
 
 };
 

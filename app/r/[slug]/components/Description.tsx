@@ -1,4 +1,4 @@
-import { RestaurantSlugType } from "./page"
+import { RestaurantSlugType } from "../page"
 import DescriptionNavbar from "./DescriptionNavbar"
 import Galery from "./Galery"
 import Ratings from "./Ratings"

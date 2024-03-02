@@ -1,16 +1,16 @@
 import type { Metadata } from 'next'
 import Navbar from '../../components/Navbar'
-import Header from './Header';
+import Header from './components/Header';
 
 
 const title = {
-  name: "Lorem Ipsum",
+  name: "name",
   description: "This is a amazing restaurant"
 }
 
 
 export const metadata: Metadata = {
-  title:  title.name + ` | Restaurant`,
+  title:  `| Restaurant`,
   description: title.description,
     icons: 
       {
@@ -32,7 +32,7 @@ export default function RestaurantLayout({
         <div className="max-w-screen-2xl m-auto bg-white">
           {/* Navbar is Global */}
           <Navbar />
-          <Header name={params.slug}/>
+          <Header name={params.slug} restaurant={[]}/>
           {children}
         </div>
       </body>
