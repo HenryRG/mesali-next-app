@@ -72,7 +72,7 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
           />
         <div className='flex justify-center'>
           <button className='bg-red-600 text-white w-[250px] uppercase p-2 px-4 rounded hover:bg-red-700'>
-            {renderButtonsContent("Sign in", "Create a account")}
+            {renderButtonsContent("Sign in", "Create an account")}
           </button>
         </div>
         </Box>
