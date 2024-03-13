@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+// import Button from '@mui/material/Button';
+// import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import AuthModalInputs from './AuthModalInputs';
+import useAuth from '@/hooks/useAuth';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -24,6 +25,7 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const { signin } = useAuth()
 
   const [inputs, setInputs] = useState({
     firstName: "",
@@ -33,7 +35,27 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
     city: "",
     password: "",
     verifyPassword: ""
-  })                                /** typescript like this */
+  })                    
+  
+  const [disabled, setDisabled] = useState(true);
+  
+  useEffect(()=>{
+    if(isSignin){
+      if(inputs.email && inputs.password){
+        return setDisabled(false)
+      } 
+    } else{
+      if(inputs.email && inputs.password && 
+        inputs.verifyPassword && inputs.firstName && 
+        inputs.lastName && inputs.city && inputs.phone){
+          return setDisabled(false)
+        }
+    }
+
+    setDisabled(true)
+  }, [inputs])
+  
+  /** typescript like this */
   const handleChangeInputsValue = (e: React.ChangeEvent<HTMLInputElement>) =>{
     setInputs({
       ...inputs,
@@ -41,9 +63,14 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
     })
   }
 
+  //    useAuth Hook to make a HTTP request on on frontend
+  const handleClick = () =>{
+    if(isSignin){
+      signin({email: inputs.email, password: inputs.password})
+    }
+  }
 
-// <button className='bg-green-400 text-white border p-2 px-4 rounded mr-3'>Sign in</button>
-{/* <button className='border p-2 px-4 rounded'>Sign up</button> */}
+
   const renderButtonsContent = (signinContent: string, signupContent: string) =>{
     return isSignin ? signinContent : signupContent; {/* I want to return this same component 
                                                         with differents contents  */}
@@ -71,7 +98,11 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
             isSignin={isSignin}
           />
         <div className='flex justify-center'>
-          <button className='bg-red-600 text-white w-[250px] uppercase p-2 px-4 rounded hover:bg-red-700'>
+          <button 
+          className='bg-red-600 text-white w-[250px] uppercase p-2 px-4 rounded hover:bg-red-700 disabled:bg-gray-500'
+          disabled={disabled}
+          onClick={handleClick}
+          >
             {renderButtonsContent("Sign in", "Create an account")}
           </button>
         </div>

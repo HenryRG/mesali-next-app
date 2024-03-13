@@ -60,5 +60,5 @@ export async function POST(request: Request){
         .sign(secret)
 
 
-    return NextResponse.json({token}, {status: 404})
+    return NextResponse.json({token}, {status: 200})
 }

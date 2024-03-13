@@ -17,7 +17,7 @@ export async function POST(request: Request) {
   const {firstName, lastName, email, phone, city, password} = await request.json();
 
   const errors: any[] = [];
-
+  
   const validationSchema = [
     {
       valid: validator.isLength(firstName, {
@@ -92,6 +92,6 @@ export async function POST(request: Request) {
     .sign(secret)
 
     
-  return NextResponse.json( {token} );
+  return NextResponse.json( {token}, {status: 200} );
 }
  
