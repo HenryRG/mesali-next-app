@@ -19,7 +19,7 @@ const Stars = ({review, reviewRating}: {review: Review[], reviewRating?: number}
       else if(difference < 1 && difference > 0){ //is between 0 and 1 but != 1 || 0
         if(difference <= 0.2) star.push(emptyStar);
         else if(difference > 0.2 && difference <= 0.6) star.push(halfStar)
-        else star.push(fullStar) // is == 0
+        else star.push(fullStar) // is == 1
       }
       else star.push(emptyStar)
     }       // iterate from the stars that are pushed into star[]  

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import AuthContext from './context/AuthContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -28,7 +29,9 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-gray-100 min-h-screen w-screen overflow-x-hidden">
         <div className="max-w-screen-2xl m-auto bg-white">
-          {children}
+          <AuthContext>
+            {children}
+          </AuthContext>
         </div>
       </body>
     </html>
