@@ -100,7 +100,7 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
               {error ? <Alert className='mb-4' severity="error">{error}</Alert> : null}
 
               <div className="uppercase pb-2 border-b-4  text-left">
-                <p className="font-light text-2xlg">{renderButtonsContent("Sign in", "CREATE AN ACCOUNT")}{data?.city}</p>
+                <p className="font-light text-2xlg">{renderButtonsContent("Sign in", "CREATE AN ACCOUNT")}</p>
               </div>
             </div>
             <AuthModalInputs inputs={inputs} 
