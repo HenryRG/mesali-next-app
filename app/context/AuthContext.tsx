@@ -33,7 +33,7 @@ export default function AuthContext({children}: {children: React.ReactNode}){
     const [authState, setAuthState] = useState<State>({
         loading: false,
         data: null,
-        error: "Hello dare"
+        error: null
     })
 
 

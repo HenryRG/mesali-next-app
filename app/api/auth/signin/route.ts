@@ -4,6 +4,7 @@ import validator from 'validator'
 import bcrypt from 'bcrypt'
 import * as jose from 'jose'  //to create a JWT
 
+
 const prisma = new PrismaClient()
 
 export async function GET(request: Request){
@@ -59,6 +60,21 @@ export async function POST(request: Request){
         .setExpirationTime("24h")
         .sign(secret)
 
+    const userObj = {
+        firstName: verifyUserWithAccount.first_name,
+        lastName: verifyUserWithAccount.last_name,
+        email: verifyUserWithAccount.email,
+        phone: verifyUserWithAccount.phone,
+        city: verifyUserWithAccount.city,
+    }
 
-    return NextResponse.json({token}, {status: 200})
+    const sixtySixDays = 6 * 60 * 24;
+
+    return NextResponse.json(userObj, {
+        status: 200,
+        headers: {
+            'Set-Cookie': `jwt=${token}; Max-Age=${sixtySixDays}; Path=/`
+        }
+    
+    })
 }

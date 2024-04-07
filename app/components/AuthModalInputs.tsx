@@ -68,14 +68,14 @@ const AuthModalInputs = (
           className='w-[47%] m-1  border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
           />
         </div> } 
-        <div className="mr-2 w-full">
+        <div className="mr-3 w-full">
           <input 
             type="password" 
             placeholder={isSignin? "Your password" :'Create a password' }
             value={inputs.password}
             onChange={handleChangeInputsValue}
             name="password"
-          className='w-full my-1 border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
+          className='w-full m-1 border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
           />
         </div>
        {isSignin ? null : 

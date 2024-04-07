@@ -1,10 +1,12 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import AuthModalInputs from './AuthModalInputs';
 import useAuth from '@/hooks/useAuth';
+import { AuthenticationContext } from '../context/AuthContext';
+import { Alert } from '@mui/material';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -23,6 +25,7 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const {loading, error, data} = useContext(AuthenticationContext)
   const { signin } = useAuth()
 
   const [inputs, setInputs] = useState({
@@ -64,7 +67,7 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
   //    useAuth Hook to make a HTTP request on on frontend
   const handleClick = () =>{
     if(isSignin){
-      signin({email: inputs.email, password: inputs.password})
+      signin({email: inputs.email, password: inputs.password}, handleClose)
     }
   }
 
@@ -86,24 +89,34 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <div className="p-2">
-            <div className="uppercase pb-2 border-b-4  text-left">
-              <p className="font-light text-2xlg">{renderButtonsContent("Sign in", "CREATE AN ACCOUNT")}</p>
+          {loading ? 
+            <div className="p-2 h-[600px] flex justify-center">
+              <div className='w-10 h-10 bg-transparent border-4 border-gray-300 border-l-blue-600 rounded-full animate-spin'></div>
             </div>
-          </div>
-          <AuthModalInputs inputs={inputs} 
-            handleChangeInputsValue={handleChangeInputsValue}
-            isSignin={isSignin}
-          />
-        <div className='flex justify-center'>
-          <button 
-          className='bg-red-600 text-white w-[250px] uppercase p-2 px-4 rounded hover:bg-red-700 disabled:bg-gray-500'
-          disabled={disabled}
-          onClick={handleClick}
-          >
-            {renderButtonsContent("Sign in", "Create an account")}
-          </button>
-        </div>
+           : 
+          <div>
+            <div className="p-2">
+                {/* Error message */}
+              {error ? <Alert className='mb-4' severity="error">{error}</Alert> : null}
+
+              <div className="uppercase pb-2 border-b-4  text-left">
+                <p className="font-light text-2xlg">{renderButtonsContent("Sign in", "CREATE AN ACCOUNT")}{data?.city}</p>
+              </div>
+            </div>
+            <AuthModalInputs inputs={inputs} 
+              handleChangeInputsValue={handleChangeInputsValue}
+              isSignin={isSignin}
+            />
+            <div className='flex justify-center'>
+              <button 
+              className='bg-red-600 text-white w-[250px] uppercase p-2 px-4 rounded hover:bg-red-700 disabled:bg-gray-500'
+              disabled={disabled}
+              onClick={handleClick}
+              >
+                {renderButtonsContent("Sign in", "Create an account")}
+              </button>
+            </div>
+          </div>}
         </Box>
       </Modal>
     </div>
