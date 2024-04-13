@@ -79,14 +79,14 @@ const AuthModalInputs = (
           />
         </div>
        {isSignin ? null : 
-        <div className="mr-2 w-full">
+        <div className="mr-3 w-full">
           <input 
             type="password" 
             placeholder='Verify the password' 
             value={inputs.verifyPassword}
             onChange={handleChangeInputsValue}
             name="verifyPassword"
-          className='w-full my-1 border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
+          className='w-full m-1 border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
           />
         </div>}
       </div>

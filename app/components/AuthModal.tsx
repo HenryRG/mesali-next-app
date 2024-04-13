@@ -25,8 +25,12 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const {loading, error, data} = useContext(AuthenticationContext)
-  const { signin } = useAuth()
+  const {loading, error} = useContext(AuthenticationContext)
+  const { signin, signup } = useAuth()
+
+  const handleChangePass = () => {
+    return inputs.password === inputs.verifyPassword ? "" : "Passwords don't mach"
+  }
 
   const [inputs, setInputs] = useState({
     firstName: "",
@@ -47,12 +51,11 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
       } 
     } else{
       if(inputs.email && inputs.password && 
-        inputs.verifyPassword && inputs.firstName && 
+        inputs.verifyPassword && inputs.password === inputs.verifyPassword && inputs.firstName && 
         inputs.lastName && inputs.city && inputs.phone){
           return setDisabled(false)
         }
     }
-
     setDisabled(true)
   }, [inputs])
   
@@ -68,9 +71,11 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
   const handleClick = () =>{
     if(isSignin){
       signin({email: inputs.email, password: inputs.password}, handleClose)
+    } 
+    else {
+      signup(inputs, handleClose)
     }
   }
-
 
   const renderButtonsContent = (signinContent: string, signupContent: string) =>{
     return isSignin ? signinContent : signupContent; {/* I want to return this same component 
@@ -107,9 +112,10 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
               handleChangeInputsValue={handleChangeInputsValue}
               isSignin={isSignin}
             />
+            <div className='-mt-4  absolute'><p className="text-orange-600">{handleChangePass()}</p></div>
             <div className='flex justify-center'>
               <button 
-              className='bg-red-600 text-white w-[250px] uppercase p-2 px-4 rounded hover:bg-red-700 disabled:bg-gray-500'
+              className='bg-red-600 mt-4 text-white w-[250px] uppercase p-2 px-4 rounded hover:bg-red-700 disabled:bg-gray-500'
               disabled={disabled}
               onClick={handleClick}
               >

@@ -91,7 +91,21 @@ export async function POST(request: Request) {
     .setExpirationTime("24h")
     .sign(secret)
 
-    
-  return NextResponse.json( {token}, {status: 200} );
+  const userObj = {
+    firstName: user.first_name,
+    lastName: user.last_name,
+    email: user.email,
+    phone: user.phone,
+    city: user.city,
+  }
+
+  const sixtySixDays = 6 * 60 * 24;
+
+  return NextResponse.json(userObj, {
+    status: 200,
+    headers: {
+        'Set-Cookie': `jwt=${token}; Max-Age=${sixtySixDays}; Path=/`
+    }
+  })
 }
  

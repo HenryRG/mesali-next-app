@@ -75,6 +75,5 @@ export async function POST(request: Request){
         headers: {
             'Set-Cookie': `jwt=${token}; Max-Age=${sixtySixDays}; Path=/`
         }
-    
     })
 }
