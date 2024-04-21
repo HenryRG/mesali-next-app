@@ -17,7 +17,7 @@ const AuthModalInputs = (
     {inputs, handleChangeInputsValue, isSignin}
       : Props) => {
   return (
-    <div>
+    <form>
       <div className="my-3 flex justify-between flex-wrap">
         {isSignin ? null : 
         <div>
@@ -27,6 +27,7 @@ const AuthModalInputs = (
             value={inputs.firstName}
             onChange={handleChangeInputsValue}
             name="firstName"
+            autoComplete="given-name"
           className='w-[47%] m-1 border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
           />
       
@@ -46,6 +47,7 @@ const AuthModalInputs = (
             value={inputs.email}
             onChange={handleChangeInputsValue}
             name="email"
+            autoComplete="email"
           className='w-full m-1 border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
           />
         </div>
@@ -56,6 +58,7 @@ const AuthModalInputs = (
             value={inputs.phone} 
             onChange={handleChangeInputsValue}
             name="phone"
+            autoComplete="tel"
           className='w-[47%] m-1  border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
           />
 
@@ -64,6 +67,7 @@ const AuthModalInputs = (
             placeholder='City' 
             value={inputs.city}
             onChange={handleChangeInputsValue}
+            autoComplete="address-line1"
             name="city"
           className='w-[47%] m-1  border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
           />
@@ -74,6 +78,7 @@ const AuthModalInputs = (
             placeholder={isSignin? "Your password" :'Create a password' }
             value={inputs.password}
             onChange={handleChangeInputsValue}
+            autoComplete="current-password"
             name="password"
           className='w-full m-1 border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
           />
@@ -85,13 +90,14 @@ const AuthModalInputs = (
             placeholder='Verify the password' 
             value={inputs.verifyPassword}
             onChange={handleChangeInputsValue}
+            autoComplete="new-password"
             name="verifyPassword"
           className='w-full m-1 border-gray-300 border p-2 rounded focus:outline-none focus:border-b-blue-800 focus:border-b-3' 
           />
         </div>}
       </div>
       
-    </div>
+    </form>
   )
 }
 

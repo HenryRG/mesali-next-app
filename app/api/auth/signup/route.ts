@@ -25,7 +25,7 @@ export async function POST(request: Request) {
         max: 20 
       }),
       errorMessage: "First name is invalid"
-    },
+    },  
     {
       valid: validator.isLength(lastName, {
         min: 2, 
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
     }
   })
   if(errors.length){
-    return NextResponse.json({errorMessage: errors[0]})
+    return NextResponse.json({errorMessage: errors[0]}, {status: 400})
   }
   //Verifying if exist another account with the email
   const verifyUserWithEmail = await prisma.user.findUnique({
@@ -68,7 +68,7 @@ export async function POST(request: Request) {
     }
   });
   if(verifyUserWithEmail){
-    return NextResponse.json({errorMessage: "This email is associate with anothe account."})
+    return NextResponse.json({errorMessage: "This email is associate with another account."})
   }
   const hashPassword = await bcrypt.hash(password, 10);
 
@@ -98,13 +98,23 @@ export async function POST(request: Request) {
     phone: user.phone,
     city: user.city,
   }
-
-  const sixtySixDays = 6 * 60 * 24;
+  
+  // const response = NextResponse.json({ ...userObj }, { status: 200 });
+ 
+  // response.cookies.set({
+  //   name: 'jwt',
+  //   value: token,
+  //   httpOnly: true,
+  //   maxAge: 60 * 60 * 24,
+  // });
+  
+  // return response;
+// }
 
   return NextResponse.json(userObj, {
     status: 200,
     headers: {
-        'Set-Cookie': `jwt=${token}; Max-Age=${sixtySixDays}; Path=/`
+        'Set-Cookie': `jwt=${token}; Max-Age=8640; Path=/`
     }
   })
 }

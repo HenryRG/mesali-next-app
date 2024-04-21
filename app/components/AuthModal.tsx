@@ -14,7 +14,7 @@ const style = {
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
-  height: 450,
+  height: 520,
   bgcolor: 'background.paper',
   borderRadius: '10px',
   boxShadow: 24,
@@ -25,9 +25,9 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const {loading, error} = useContext(AuthenticationContext)
+  const {loading, error, data} = useContext(AuthenticationContext)
   const { signin, signup } = useAuth()
-
+    // Verify and disable the signup action if the password don't match
   const handleChangePass = () => {
     return inputs.password === inputs.verifyPassword ? "" : "Passwords don't mach"
   }
@@ -50,8 +50,8 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
         return setDisabled(false)
       } 
     } else{
-      if(inputs.email && inputs.password && 
-        inputs.verifyPassword && inputs.password === inputs.verifyPassword && inputs.firstName && 
+      if(inputs.email && inputs.password && inputs.verifyPassword && 
+        inputs.password === inputs.verifyPassword  && inputs.firstName && 
         inputs.lastName && inputs.city && inputs.phone){
           return setDisabled(false)
         }
@@ -68,11 +68,11 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
   }
 
   //    useAuth Hook to make a HTTP request on on frontend
-  const handleClick = () =>{
+  const handleClick = () => {
     if(isSignin){
       signin({email: inputs.email, password: inputs.password}, handleClose)
-    } 
-    else {
+    } else {
+        // console.log("Button ok")
       signup(inputs, handleClose)
     }
   }
@@ -84,7 +84,7 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
 
   return (
     <div>
-      <button className={`${isSignin ?'bg-green-400 text-white' : ''} border p-2 px-4 rounded mr-3`} 
+      <button className={`${isSignin ?'bg-green-400 text-white' : ''} border p-2 w-[85px] rounded mr-3`} 
               onClick={handleOpen}>{renderButtonsContent("Sign in", "Sign up")}
       </button>
       <Modal
@@ -93,8 +93,8 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          {loading ? 
+        <Box sx={style}> {/* Is loading? */}
+          {loading ?   
             <div className="p-2 h-[600px] flex justify-center">
               <div className='w-10 h-10 bg-transparent border-4 border-gray-300 border-l-blue-600 rounded-full animate-spin'></div>
             </div>
@@ -106,13 +106,14 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
 
               <div className="uppercase pb-2 border-b-4  text-left">
                 <p className="font-light text-2xlg">{renderButtonsContent("Sign in", "CREATE AN ACCOUNT")}</p>
+
               </div>
             </div>
             <AuthModalInputs inputs={inputs} 
               handleChangeInputsValue={handleChangeInputsValue}
               isSignin={isSignin}
             />
-            <div className='-mt-4  absolute'><p className="text-orange-600">{handleChangePass()}</p></div>
+            {isSignin ? null : <div className='-mt-4  absolute'><p className="text-orange-600">{handleChangePass()}</p></div>}
             <div className='flex justify-center'>
               <button 
               className='bg-red-600 mt-4 text-white w-[250px] uppercase p-2 px-4 rounded hover:bg-red-700 disabled:bg-gray-500'
@@ -122,7 +123,8 @@ export default function AuthModal({isSignin}: {isSignin: boolean}) {
                 {renderButtonsContent("Sign in", "Create an account")}
               </button>
             </div>
-          </div>}
+          </div>
+          }
         </Box>
       </Modal>
     </div>

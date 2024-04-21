@@ -4,7 +4,6 @@ import * as jose from 'jose'
 
 
 export async function middleware(){
-console.log("Mddleware working")
 
     const bearerToken = headers().get("authorization");
 
@@ -22,8 +21,8 @@ console.log("Mddleware working")
    
     try {
         await jose.jwtVerify(token, secret);
-    } catch (error) {
-        return NextResponse.json({errorMessage: "Unauthorized request"}, {status: 401})
+    } catch (error: any) {
+        return NextResponse.json({errorMessage: ""}, {status: 401})
     }
 }
 

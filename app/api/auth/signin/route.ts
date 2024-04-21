@@ -37,16 +37,16 @@ export async function POST(request: Request){
         return NextResponse.json({errorMessage: errors[0]}, {status: 400})
     }
     // Find unique user email
-    const verifyUserWithAccount = await prisma.user.findUnique({
+    const user = await prisma.user.findUnique({
         where: {
             email,
         }
     }) //If doesn't exist 
-    if(!verifyUserWithAccount){
+    if(!user){
         return NextResponse.json({errorMessage: "Email or password are invalid"}, {status: 401})
     }
         //verify if the client password is equal to db
-    const isTheSame = await bcrypt.compare(password, verifyUserWithAccount.password)
+    const isTheSame = await bcrypt.compare(password, user.password)
 
     if(!isTheSame){
         return NextResponse.json({errorMessage: "Password invalid"}, {status: 401})
@@ -55,25 +55,23 @@ export async function POST(request: Request){
     const alg = "HS256";
     const secret = new TextEncoder().encode(process.env.JWT_SECRET)
 
-    const token = await new jose.SignJWT({email: verifyUserWithAccount.email})
+    const token = await new jose.SignJWT({email: user.email})
         .setProtectedHeader({alg})
         .setExpirationTime("24h")
         .sign(secret)
 
     const userObj = {
-        firstName: verifyUserWithAccount.first_name,
-        lastName: verifyUserWithAccount.last_name,
-        email: verifyUserWithAccount.email,
-        phone: verifyUserWithAccount.phone,
-        city: verifyUserWithAccount.city,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        email: user.email,
+        phone: user.phone,
+        city: user.city,
     }
-
-    const sixtySixDays = 6 * 60 * 24;
 
     return NextResponse.json(userObj, {
         status: 200,
         headers: {
-            'Set-Cookie': `jwt=${token}; Max-Age=${sixtySixDays}; Path=/`
+            'Set-Cookie': `jwt=${token}; Max-Age=8640; Path=/`
         }
     })
 }

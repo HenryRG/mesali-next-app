@@ -7,7 +7,6 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function GET(req: Request){
-    console.log("Me oaudhas")
     // To GET data from Headers "df"
     const bearerToken = headers().get("authorization") as string;
     const token = bearerToken.split(" ")[1]; // middleware check if is true or false
@@ -31,6 +30,20 @@ export async function GET(req: Request){
             email: payload.email,
         }
     })
+    if(!user){
+        return NextResponse.json({errorMessage: "User Not Found"}, {status: 401})
+    }
 
-    return NextResponse.json({ user } )
+    const userObj = {
+        id: user.id,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        email: user.email,
+        phone: user.phone,
+        city: user.city,
+      }
+
+    // return NextResponse.json({ user } )
+
+    return NextResponse.json(userObj, { status: 200 })
 }

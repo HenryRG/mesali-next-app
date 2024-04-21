@@ -1,6 +1,7 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 // npx prisma db push
 datasource db {
   provider = "postgresql"
@@ -61,20 +62,20 @@ enum PRICE {
 }
 
 model User {
-  id          Int @unique @default(autoincrement())
-  first_name  String
-  last_name   String
-  city        String
-  email       String @unique
-  phone       String @unique
-  password    String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @updatedAt
-  review      Review[]
+  id         Int      @id @unique @default(autoincrement())
+  first_name String
+  last_name  String
+  city       String
+  email      String   @unique
+  phone      String   @unique
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  review     Review[]
 }
 
 model Review {
-  id            Int @unique @default(autoincrement())
+  id            Int        @unique @default(autoincrement())
   first_name    String
   last_name     String
   text          String
@@ -82,7 +83,7 @@ model Review {
   restaurant_id Int
   restaurant    Restaurant @relation(fields: [restaurant_id], references: [id])
   user_id       Int
-  user          User @relation(fields: [user_id], references: [id])
-  created_at    DateTime @default(now())
-  updated_at    DateTime @updatedAt
+  user          User       @relation(fields: [user_id], references: [id])
+  created_at    DateTime   @default(now())
+  updated_at    DateTime   @updatedAt
 }
