@@ -12,19 +12,36 @@ const fetchRestaurantMenu = async (slug: string) => {
       slug
     },
     select: {
-      items: true
+      items: true,
     }
   })
   if(!restaurant){
     throw new Error()
   }   {/* Return just items because at this component you don't need everything */}
   return restaurant.items;
+}
 
+const fetchRestaurantSlug = async (slug: string) =>{
+  const restaurant = await prisma.restaurant.findUnique({
+    where: {
+      slug
+    },
+    select: {
+      id: true,
+      open_time: true,
+      close_time: true,
+      slug: true
+    }
+  }); //Make sure the data always return restaurant if not return error
+  if (!restaurant){
+    throw new Error()
+  }
+  return restaurant
 }
 
 const RestaurantMenu = async ({params}: {params: {slug: string}}) => {
    const menu = await fetchRestaurantMenu(params.slug);
-   console.log({menu})
+   const fetchRestaurant = await fetchRestaurantSlug(params.slug)
   return (
     <main >
           {/* Restaurant Menu Layout */}
@@ -36,7 +53,9 @@ const RestaurantMenu = async ({params}: {params: {slug: string}}) => {
           
         </div>
         {/* Reservation Card */}
-       <Reservation />
+       <Reservation openTime={fetchRestaurant.open_time} closeTime={fetchRestaurant.close_time} slug={fetchRestaurant.slug}
+       
+       />
       </div>
     
 

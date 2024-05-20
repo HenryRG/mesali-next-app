@@ -28,11 +28,11 @@ export default function RestaurantLayout({
 }) {
   return (
     <>
-      <body className="bg-gray-100 min-h-screen w-screen">
+      <body className="bg-gray-100 min-h-screen w-screen overflow-x-hidden">
         <div className="max-w-screen-2xl m-auto bg-white">
           {/* Navbar is Global */}
           <Navbar />
-          <Header name={params.slug} restaurant={[]}/>
+          <Header name={params.slug} restaurant={[]}/>  
           {children}
         </div>
       </body>

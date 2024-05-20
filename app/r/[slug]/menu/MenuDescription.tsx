@@ -1,6 +1,4 @@
 import { Item } from "@prisma/client"
-// import DescriptionNavbar from "../DescriptionNavbar"
-// import Reservation from "../Reservation"
 import MenuCard from "./MenuCard"
 
 

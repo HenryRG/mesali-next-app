@@ -18,14 +18,16 @@ model Restaurant {
   price       PRICE
   open_time   String
   close_time  String
-  created_at  DateTime @default(now())
-  update_at   DateTime @updatedAt
   location_id Int
+  location    Location @relation(fields: [location_id], references: [id])
   cuisine_id  Int
+  cuisine     Cuisine  @relation(fields: [cuisine_id], references: [id])
   items       Item[]
   review      Review[]
-  cuisine     Cuisine  @relation(fields: [cuisine_id], references: [id])
-  location    Location @relation(fields: [location_id], references: [id])
+  bookings    Booking[]
+  tables      Table[]
+  created_at  DateTime @default(now())
+  update_at   DateTime @updatedAt
 }
 
 model Item {
@@ -67,7 +69,7 @@ model User {
   last_name  String
   city       String
   email      String   @unique
-  phone      String   @unique
+  phone      String   
   password   String
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt
@@ -86,4 +88,41 @@ model Review {
   user          User       @relation(fields: [user_id], references: [id])
   created_at    DateTime   @default(now())
   updated_at    DateTime   @updatedAt
+}
+model Booking {
+  id                  Int      @id @default(autoincrement())
+  number_of_people    Int
+  booking_time        DateTime
+  booker_email        String
+  booker_phone        String
+  booker_first_name   String
+  booker_last_name    String
+  booker_occasion     String
+  booker_requests     String
+  restaurant_id       Int
+  restaurant          Restaurant  @relation(fields: [restaurant_id], references: [id])
+  tables              TablesOnBooking[]
+  created_at          DateTime   @default(now())
+  updated_at          DateTime   @updatedAt
+}
+
+model Table {
+  id                Int   @id   @default(autoincrement())
+  seats             Int
+  restaurant_id     Int
+  restaurant        Restaurant  @relation(fields: [restaurant_id], references: [id])
+  bookings          TablesOnBooking[]  
+  created_at        DateTime   @default(now())
+  updated_at        DateTime   @updatedAt
+}
+
+model TablesOnBooking {
+  booking_id    Int
+  booking       Booking    @relation(fields: [booking_id], references: [id])
+  table_id      Int
+  table         Table      @relation(fields: [table_id], references: [id])
+  created_at    DateTime   @default(now())
+  updated_at    DateTime   @updatedAt
+
+  @@id([booking_id, table_id])
 }

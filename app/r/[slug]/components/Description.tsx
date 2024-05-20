@@ -2,7 +2,7 @@ import { RestaurantSlugType } from "../page"
 import DescriptionNavbar from "./DescriptionNavbar"
 import Galery from "./Galery"
 import Ratings from "./Ratings"
-import Reservation from "./Reservation"
+// import Reservation from "./Reservation"
 import Reviews from "./Reviews"
 
 
@@ -13,10 +13,8 @@ interface Props {
 const Description = ({restaurant}: Props) => {
   return (
     // This is the overview description (the /r folder)
-    <div className="flex m-auto w-2/3 justify-between items-start 0 -mt-12">
-
-        {/* DESCRIPTION PORTION */}
-        <div className="bg-white rounded p-3 w-[70%] drop-shadow-lg">
+   
+      <div className="bg-white rounded p-3 w-[70%] drop-shadow-lg">
           {/* Description Navbar */}
           <DescriptionNavbar slug={restaurant.slug}/>
           {/* Title */}
@@ -33,10 +31,7 @@ const Description = ({restaurant}: Props) => {
           <Galery images={restaurant.images}/>
           {/* Reviews */}
           <Reviews review={restaurant.review}/>
-        </div>  
-       {/* DESCRIPTION  PORTION */}
-       <Reservation />
-    </div>     
+      </div>  
   )
 }
 
